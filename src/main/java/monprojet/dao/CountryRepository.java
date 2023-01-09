@@ -18,12 +18,12 @@ public interface CountryRepository extends JpaRepository<Country, Integer> {
             + "where co.id = :id")
     public int countryPopulation(@Param("id") int id);
 
-    @Query("select co.name, (select sum(ci.population) "
+    @Query("select cou.name, (select sum(ci.population) "
             + "from Country co "
             + "inner join City ci on ci.country = co.id "
-            + "where co.id = :id)"
-            +"from Country co"
-            )
-    public List<Tuple> allCountryPop();
+            + "where co.id = cou.id) "
+            + "from Country cou "
+            + "order by cou.name")
+    public List<Tuple> allCountryPopulations();
 
 }

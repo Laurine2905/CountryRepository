@@ -1,5 +1,6 @@
 package monprojet.dao;
 
+import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -41,6 +42,25 @@ public class CountryRepositoryTest {
         int combienDePaysDansLeJeuDeTest = 3 + 1; // 3 dans data.sql, 1 dans test-data.sql
         long nombre = countryDAO.count();
         assertEquals(combienDePaysDansLeJeuDeTest, nombre, "On doit trouver 4 pays" );
+    }
+
+    @Test
+    @Sql("test-data.sql")
+    void countryPopTest (){
+        log.info("On test la population de la France");
+        int Truepopulation = 12+20; // 12 pour la population de Paris et 20 pour la population
+        int pop = countryDAO.countryPopulation(1);
+        assertEquals(Truepopulation, pop, "On doit trouver une population de 32");
+
+    }
+
+    @Test
+    void AllCountryPopTest(){
+        log.info("On compte toutes les populations");
+        List<Tuple> list = countryDAO.allCountryPopulations();
+        assertEquals((long) 12, list.get(0).get(1), "On doit trouver une population de 32");
+        assertEquals((long)18, list.get(1).get(1), "On doit trouver une population de 18");
+        assertEquals((long)27, list.get(2).get(1), "On doit trouver une population de 27");
     }
 
 
