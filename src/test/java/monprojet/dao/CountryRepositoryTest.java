@@ -58,7 +58,7 @@ public class CountryRepositoryTest {
     void AllCountryPopTest(){
         log.info("On compte toutes les populations");
         List<Tuple> list = countryDAO.allCountryPopulations();
-        assertEquals((long) 12, list.get(0).get(1), "On doit trouver une population de 32");
+        assertEquals((long) 12, list.get(0).get(1), "On doit trouver une population de 12");
         assertEquals((long)18, list.get(1).get(1), "On doit trouver une population de 18");
         assertEquals((long)27, list.get(2).get(1), "On doit trouver une population de 27");
     }
